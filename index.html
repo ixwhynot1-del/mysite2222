@@ -1,0 +1,1632 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Roma — Frontend Developer and Web Designer. Creating modern websites and digital interfaces.">
+  <title>Roma — Frontend Developer & Web Designer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #fffdf8;
+      --text: #20211e;
+      --muted: #77766f;
+      --line: #dedbd2;
+      --accent: #c7d8c1;
+      --accent-dark: #486047;
+      --dark: #20211e;
+      --radius: 24px;
+      --shadow: 0 18px 50px rgba(38, 37, 31, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 18px 0;
+      transition: .3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(245, 243, 238, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.06em;
+    }
+
+    .logo span {
+      color: var(--accent-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-size: 14px;
+      font-weight: 600;
+      color: #62615b;
+      transition: color .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-contact {
+      padding: 11px 18px;
+      background: var(--dark);
+      color: white !important;
+      border-radius: 100px;
+    }
+
+    .nav-contact::after {
+      display: none;
+    }
+
+    .burger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--dark);
+      position: relative;
+    }
+
+    .burger span,
+    .burger span::before,
+    .burger span::after {
+      content: "";
+      position: absolute;
+      width: 17px;
+      height: 1.5px;
+      background: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: .3s ease;
+    }
+
+    .burger span::before {
+      top: -6px;
+    }
+
+    .burger span::after {
+      top: 6px;
+    }
+
+    .burger.active span {
+      background: transparent;
+    }
+
+    .burger.active span::before {
+      transform: translate(-50%, 50%) rotate(45deg);
+    }
+
+    .burger.active span::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent-dark);
+      margin-bottom: 25px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-dark);
+    }
+
+    .hero h1 {
+      max-width: 750px;
+      font-size: clamp(52px, 7vw, 88px);
+      line-height: .98;
+      letter-spacing: -.07em;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent-dark);
+    }
+
+    .hero-description {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+      margin-bottom: 35px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(32, 33, 30, .16);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .portrait {
+      width: min(390px, 100%);
+      aspect-ratio: 4 / 5;
+      background: #d8dfd2;
+      border-radius: 190px 190px 28px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portrait::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      background: #aebca8;
+      border-radius: 50%;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .portrait::after {
+      content: "R";
+      position: absolute;
+      left: 50%;
+      top: 125px;
+      transform: translateX(-50%);
+      font-size: 92px;
+      line-height: 1;
+      font-weight: 800;
+      color: #eef1e9;
+    }
+
+    .visual-note {
+      position: absolute;
+      right: -20px;
+      bottom: 35px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 15px 18px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .visual-note span {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 55px;
+    }
+
+    .section-number {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 13px;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 800;
+    }
+
+    .section-description {
+      max-width: 400px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ABOUT */
+
+    .about {
+      background: #ebe9e1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 80px;
+    }
+
+    .about-text {
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.25;
+      letter-spacing: -.04em;
+      font-weight: 600;
+    }
+
+    .about-text span {
+      color: var(--muted);
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid #d4d1c7;
+    }
+
+    .skill {
+      padding: 25px 0;
+      border-bottom: 1px solid #d4d1c7;
+    }
+
+    .skill:nth-child(odd) {
+      margin-right: 30px;
+    }
+
+    .skill-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .skill-info {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* PROJECTS */
+
+    .filters {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .filter {
+      padding: 9px 17px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: .25s ease;
+    }
+
+    .filter:hover,
+    .filter.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: white;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+
+    .project-image {
+      height: 310px;
+      padding: 25px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project:nth-child(1) .project-image {
+      background: #d7e0d2;
+    }
+
+    .project:nth-child(2) .project-image {
+      background: #ded9cc;
+    }
+
+    .project:nth-child(3) .project-image {
+      background: #d5d9dc;
+    }
+
+    .project:nth-child(4) .project-image {
+      background: #e3d6ca;
+    }
+
+    .mockup {
+      width: 85%;
+      height: 78%;
+      margin: auto;
+      background: #fffdf8;
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, .12);
+      padding: 18px;
+      transition: transform .4s ease;
+    }
+
+    .project:hover .mockup {
+      transform: translateY(-10px) rotate(-1deg);
+    }
+
+    .mockup-line {
+      height: 8px;
+      width: 55%;
+      background: #d8d6cf;
+      border-radius: 10px;
+      margin-bottom: 14px;
+    }
+
+    .mockup-block {
+      height: 70px;
+      background: #eeece5;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mockup-small {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mockup-small div {
+      height: 45px;
+      background: #e4e2db;
+      border-radius: 7px;
+    }
+
+    .project-content {
+      padding: 25px;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .project h3 {
+      font-size: 23px;
+      letter-spacing: -.04em;
+      margin-bottom: 8px;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      background: var(--dark);
+      color: white;
+    }
+
+    .contact .section-number {
+      color: #999990;
+    }
+
+    .contact .section-title {
+      color: white;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+    }
+
+    .contact-intro {
+      color: #aaa9a1;
+      max-width: 440px;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-top: 25px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 35px;
+    }
+
+    .social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 45px;
+      padding: 0 17px;
+      border: 1px solid #484943;
+      border-radius: 100px;
+      font-size: 12px;
+      transition: .25s ease;
+    }
+
+    .social:hover {
+      background: white;
+      color: var(--dark);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field label {
+      display: block;
+      color: #8e8e87;
+      font-size: 11px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #454640;
+      background: transparent;
+      color: white;
+      padding: 10px 0 13px;
+      outline: none;
+      resize: vertical;
+      transition: border-color .25s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: white;
+    }
+
+    .field textarea {
+      min-height: 100px;
+    }
+
+    .error {
+      color: #e7a9a9;
+      font-size: 11px;
+      display: none;
+      margin-top: 5px;
+    }
+
+    .form-submit {
+      align-self: flex-start;
+      background: white;
+      color: var(--dark);
+      margin-top: 10px;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 255, 255, .12);
+    }
+
+    .success {
+      display: none;
+      color: #b8d6ae;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--dark);
+      border-top: 1px solid #3d3e39;
+      color: #888881;
+      padding: 25px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* MODAL */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(25, 26, 23, .55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      width: min(600px, 100%);
+      background: var(--surface);
+      border-radius: 25px;
+      padding: 35px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform .3s ease;
+    }
+
+    .modal.open .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 22px;
+      top: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #eeece5;
+      font-size: 20px;
+    }
+
+    .modal-tag {
+      color: var(--accent-dark);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 12px;
+    }
+
+    .modal h2 {
+      font-size: 34px;
+      letter-spacing: -.05em;
+      margin-bottom: 15px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* ANIMATION */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        gap: 55px;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .portrait {
+        width: 280px;
+      }
+
+      .about-grid {
+        gap: 45px;
+      }
+
+      .contact-grid {
+        gap: 50px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(320px, 85%);
+        height: 100vh;
+        background: var(--surface);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px;
+        gap: 25px;
+        box-shadow: -20px 0 50px rgba(0, 0, 0, .08);
+        transition: right .35s ease;
+      }
+
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 22px;
+      }
+
+      .nav-contact {
+        font-size: 14px !important;
+      }
+
+      .burger {
+        display: block;
+        z-index: 110;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section-head {
+        display: block;
+        margin-bottom: 35px;
+      }
+
+      .section-description {
+        margin-top: 20px;
+      }
+
+      .skills {
+        grid-template-columns: 1fr;
+      }
+
+      .skill:nth-child(odd) {
+        margin-right: 0;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project-image {
+        height: 260px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .modal-content {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header">
+    <div class="container nav">
+      <a href="#home" class="logo">roma<span>.</span></a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact" class="nav-contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Open menu">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-content reveal">
+          <div class="eyebrow">Frontend Developer</div>
+
+          <h1>
+            I create websites
+            people actually
+            <em>want to use.</em>
+          </h1>
+
+          <p class="hero-description">
+            I'm Roma, a frontend developer and web designer.
+            I build fast, clean and modern websites with attention
+            to every detail of the interface.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View my work →</a>
+            <a href="#contact" class="btn btn-secondary">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="portrait"></div>
+
+          <div class="visual-note">
+            Available for work
+            <span>Frontend · Web Design</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div>
+            <div class="section-number">01 / About</div>
+            <h2 class="section-title">Who I am</h2>
+          </div>
+
+          <p class="section-description">
+            I don't just build pages from blocks — I think about
+            how people will interact with the product.
+          </p>
+        </div>
+
+        <div class="about-grid">
+
+          <div class="about-text reveal">
+            I like minimal design,
+            clean code and interfaces
+            that <span>don't need an explanation.</span>
+          </div>
+
+          <div class="skills reveal">
+
+            <div class="skill">
+              <div class="skill-name">HTML / CSS</div>
+              <div class="skill-info">Semantic and responsive development</div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">JavaScript</div>
+              <div class="skill-info">Interactions and interface logic</div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">React</div>
+              <div class="skill-info">Component-based development</div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">UI / UX</div>
+              <div class="skill-info">Thoughtful user experiences</div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">Responsive</div>
+              <div class="skill-info">Optimized for every screen size</div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">Git</div>
+              <div class="skill-info">Version control and project workflow</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div>
+            <div class="section-number">02 / Selected work</div>
+            <h2 class="section-title">Projects</h2>
+          </div>
+
+          <p class="section-description">
+            A selection of concepts showing my approach
+            to design and development.
+          </p>
+        </div>
+
+        <div class="filters reveal">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="web">Web</button>
+          <button class="filter" data-filter="design">Design</button>
+          <button class="filter" data-filter="react">React</button>
+        </div>
+
+        <div class="projects">
+
+          <article class="project reveal"
+                   data-category="web"
+                   data-title="Personal Portfolio"
+                   data-description="A minimalist personal portfolio website with responsive layouts, smooth animations and a strong focus on showcasing the developer's work."
+                   data-type="Web Development">
+
+            <div class="project-image">
+              <div class="mockup">
+                <div class="mockup-line"></div>
+                <div class="mockup-block"></div>
+                <div class="mockup-small">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span>Web Development</span>
+                <span>2026</span>
+              </div>
+
+              <h3>Personal Portfolio</h3>
+
+              <p>
+                Personal portfolio with clean typography
+                and a responsive interface.
+              </p>
+            </div>
+          </article>
+
+          <article class="project reveal"
+                   data-category="design"
+                   data-title="Creative Landing"
+                   data-description="A landing page concept for a creative brand. The main focus is visual hierarchy, typography and simple navigation."
+                   data-type="UI / UX Design">
+
+            <div class="project-image">
+              <div class="mockup">
+                <div class="mockup-line"></div>
+                <div class="mockup-block"></div>
+                <div class="mockup-small">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span>UI / UX Design</span>
+                <span>2026</span>
+              </div>
+
+              <h3>Creative Landing</h3>
+
+              <p>
+                A modern landing page concept
+                for a creative project.
+              </p>
+            </div>
+          </article>
+
+          <article class="project reveal"
+                   data-category="react"
+                   data-title="Analytics Dashboard"
+                   data-description="A React-based analytics dashboard. The component structure makes it easy to expand the project with additional sections and functionality."
+                   data-type="React">
+
+            <div class="project-image">
+              <div class="mockup">
+                <div class="mockup-line"></div>
+                <div class="mockup-block"></div>
+                <div class="mockup-small">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span>React</span>
+                <span>2026</span>
+              </div>
+
+              <h3>Analytics Dashboard</h3>
+
+              <p>
+                Analytics interface built with
+                a component-based architecture.
+              </p>
+            </div>
+          </article>
+
+          <article class="project reveal"
+                   data-category="web"
+                   data-title="Business Website"
+                   data-description="A modern business website focused on clear structure, mobile responsiveness and conversion-oriented elements."
+                   data-type="Web Development">
+
+            <div class="project-image">
+              <div class="mockup">
+                <div class="mockup-line"></div>
+                <div class="mockup-block"></div>
+                <div class="mockup-small">
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-meta">
+                <span>Web Development</span>
+                <span>2026</span>
+              </div>
+
+              <h3>Business Website</h3>
+
+              <p>
+                A modern business website
+                with a clear structure.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+
+        <div class="section-head reveal">
+          <div>
+            <div class="section-number">03 / Contact</div>
+            <h2 class="section-title">Let's<br>talk.</h2>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="reveal">
+            <p class="contact-intro">
+              Have a website idea, need a design or development?
+              Send me a message — we'll discuss the project,
+              timeline and the best approach.
+            </p>
+
+            <div class="socials">
+              <a class="social"
+                 href="https://t.me/"
+                 target="_blank"
+                 rel="noopener">
+                Telegram
+              </a>
+
+              <a class="social"
+                 href="https://github.com/"
+                 target="_blank"
+                 rel="noopener">
+                GitHub
+              </a>
+
+              <a class="social"
+                 href="mailto:roma@example.com">
+                Email
+              </a>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm" novalidate>
+
+            <div class="field">
+              <label for="name">Your name</label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="How should I call you?"
+              >
+
+              <div class="error" id="nameError">
+                Please enter your name.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@mail.com"
+              >
+
+              <div class="error" id="emailError">
+                Please enter a valid email.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me a little about your project..."
+              ></textarea>
+
+              <div class="error" id="messageError">
+                Please enter a message.
+              </div>
+            </div>
+
+            <button type="submit" class="btn form-submit">
+              Send message →
+            </button>
+
+            <div class="success" id="successMessage">
+              Thank you! Your message has been validated successfully.
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+
+      <div>
+        © 2026 Roma. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="modal" id="projectModal">
+
+    <div class="modal-content">
+
+      <button
+        class="modal-close"
+        id="modalClose"
+        aria-label="Close">
+        ×
+      </button>
+
+      <div class="modal-tag" id="modalTag"></div>
+
+      <h2 id="modalTitle"></h2>
+
+      <p id="modalDescription"></p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const header = document.getElementById("header");
+    const burger = document.getElementById("burger");
+    const navLinks = document.getElementById("navLinks");
+
+    /* Header */
+
+    window.addEventListener("scroll", () => {
+      header.classList.toggle(
+        "scrolled",
+        window.scrollY > 20
+      );
+    });
+
+    /* Mobile menu */
+
+    burger.addEventListener("click", () => {
+
+      burger.classList.toggle("active");
+
+      navLinks.classList.toggle("open");
+
+    });
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          burger.classList.remove("active");
+
+          navLinks.classList.remove("open");
+
+        });
+
+      });
+
+    /* Project filtering */
+
+    const filters =
+      document.querySelectorAll(".filter");
+
+    const projects =
+      document.querySelectorAll(".project");
+
+    filters.forEach(filter => {
+
+      filter.addEventListener("click", () => {
+
+        filters.forEach(item => {
+          item.classList.remove("active");
+        });
+
+        filter.classList.add("active");
+
+        const category =
+          filter.dataset.filter;
+
+        projects.forEach(project => {
+
+          const matches =
+            category === "all" ||
+            project.dataset.category === category;
+
+          if (matches) {
+
+            project.style.display = "block";
+
+            setTimeout(() => {
+
+              project.style.opacity = "1";
+
+              project.style.transform =
+                "translateY(0)";
+
+            }, 20);
+
+          } else {
+
+            project.style.opacity = "0";
+
+            project.style.transform =
+              "translateY(10px)";
+
+            setTimeout(() => {
+
+              project.style.display = "none";
+
+            }, 250);
+
+          }
+
+        });
+
+      });
+
+    });
+
+    /* Project modal */
+
+    const modal =
+      document.getElementById("projectModal");
+
+    const modalClose =
+      document.getElementById("modalClose");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+    const modalDescription =
+      document.getElementById("modalDescription");
+
+    const modalTag =
+      document.getElementById("modalTag");
+
+    projects.forEach(project => {
+
+      project.addEventListener("click", () => {
+
+        modalTitle.textContent =
+          project.dataset.title;
+
+        modalDescription.textContent =
+          project.dataset.description;
+
+        modalTag.textContent =
+          project.dataset.type;
+
+        modal.classList.add("open");
+
+        document.body.style.overflow =
+          "hidden";
+
+      });
+
+    });
+
+    function closeModal() {
+
+      modal.classList.remove("open");
+
+      document.body.style.overflow = "";
+
+    }
+
+    modalClose.addEventListener(
+      "click",
+      closeModal
+    );
+
+    modal.addEventListener("click", event => {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    });
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+        closeModal();
+      }
+
+    });
+
+    /* Form validation */
+
+    const form =
+      document.getElementById("contactForm");
+
+    form.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      const name =
+        document.getElementById("name");
+
+      const email =
+        document.getElementById("email");
+
+      const message =
+        document.getElementById("message");
+
+      const nameError =
+        document.getElementById("nameError");
+
+      const emailError =
+        document.getElementById("emailError");
+
+      const messageError =
+        document.getElementById("messageError");
+
+      const success =
+        document.getElementById("successMessage");
+
+      let valid = true;
+
+      nameError.style.display = "none";
+
+      emailError.style.display = "none";
+
+      messageError.style.display = "none";
+
+      success.style.display = "none";
+
+      if (name.value.trim().length < 2) {
+
+        nameError.style.display =
+          "block";
+
+        valid = false;
+
+      }
+
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(
+        email.value.trim()
+      )) {
+
+        emailError.style.display =
+          "block";
+
+        valid = false;
+
+      }
+
+      if (message.value.trim().length < 5) {
+
+        messageError.style.display =
+          "block";
+
+        valid = false;
+
+      }
+
+      if (valid) {
+
+        success.style.display =
+          "block";
+
+        form.reset();
+
+      }
+
+    });
+
+    /* Scroll reveal animations */
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(element => {
+
+        observer.observe(element);
+
+      });
+
+  </script>
+
+</body>
+</html>
+
